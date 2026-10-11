@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>edit-profilepage</title>
+</head>
+<body>
+
+<%- include('./partials/nav') %>
+
+<div class="container mt-5">
+    <h2>Edit Profile</h2>
+    <form accept="user/profile/edit" method="POST">
+        <div class="mb-3">
+            <label class="form-label">Full Name</label>
+            <input type="text" name="fullName" class="form-control" value="<%= user.fullName %>" />
+        </div>
+         <div class="mb-3">
+            <label class="form-label">Email</label>
+            <input type="text" name="email" class="form-control" value="<%= user.email %>" />
+        </div>
+       <div class="mb-3">
+            <label class="form-label">Bio</label>
+            <input type="text" name="bio" class="form-control" value="<%= user.bio %>" />
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Location</label>
+            <input type="text" name="location" class="form-control" value="<%= user.location %>"/>
+        </div>
+        <div class="mb-3">
+            <label class="form-label">Website</label>
+            <input type="text" name="website" class="form-control" value="<%= user.website %>"/>
+        </div>
+         <button class="btn btn-primary">Seve Changes</button>
+    </form>
+</div>
+   
+<%- include('./partials/scripts') %>
+</body>
+</html>

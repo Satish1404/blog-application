@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>profilepage</title>
+</head>
+<body>
+
+<%- include('./partials/nav') %>
+
+<div class="container mt-5">
+    <div class="card p-4">
+        <div class="text-center">
+            <img src="<%= user.profileImageURL %>" class="rounded-circle" height="150" width="150"/>
+            <h2 class="mt-3"><%= user.fullName %> </h2>
+            <p><%= user.email %></p>
+            <p><%= user.bio || 'No bio add yet.' %></p>
+        </div>
+        <hr/>
+        <div>
+            <p> <strong>Location:</strong> <%= user.location || 'not added' %> </p>
+        </div>
+        <div>
+            <p> <strong>Website:</strong> <%= user.website || 'not added' %> </p>
+        </div>
+        <a href="/user/profile/edit" class="btn btn-primary"> Edit Profile</a>
+    </div>
+    
+    <div class="text-center">
+        <h4><%= blogs.length %></h4>
+        <p>Blogs</p>
+    </div>
+  
+    <div class="mb-5">
+        <h4 class="mb-4">Edit profileImage</h4>
+        <form action="/user/profile/image" method="POST" enctype="multipart/form-data">
+            
+            <input
+                type="file"
+                name="profileImage"
+                
+            >
+
+            <button type="submit" class="btn btn-info">
+                Upload Image
+            </button>
+
+        </form>
+    </div>
+
+     <h3 class="mb-3"> My Blog</h3>
+
+    <div class="row">
+        <% blogs.forEach(blog => { %>
+         <div class="col-md-4 mb-4" >
+            <div class="card">
+                <div class="card-body">
+                    <h5><%= blog.title %></h5>
+                    <a href="/blog/<%= blog._id %>" class="btn btn-primary">View Blog</a>
+                </div>
+            </div>
+         </div>
+        <% }) %>
+    </div>
+
+</div>
+
+
+
+<%- include('./partials/scripts') %>
+</body>
+</html>

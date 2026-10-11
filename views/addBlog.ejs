@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>Create blog</title>
+</head>
+<body>
+
+<%- include('./partials/nav') %>
+
+<div class="container mt-4">
+    <h1 class="text-center">Create New Blog</h1>
+    <form action="/blog" method="POST" enctype="multipart/form-data">
+
+       <div class="mb-3">
+
+            <label class="form-label">
+                Category
+            </label>
+
+            <select
+                name="category"
+                class="form-select"
+                required
+            >
+
+                <option value="">
+                    Select Category
+                </option>
+
+                <% categories.forEach(category => { %>
+
+                    <option value="<%= category._id %>">
+                        <%= category.name %>
+                    </option>
+
+                <% }) %>
+
+            </select>
+
+        </div>
+
+
+
+  <div class="mb-3">
+    <label class="form-label">Tags</label>
+
+    <% tags.forEach(tag => { %>
+
+        <div class="form-check">
+            <input
+                class="form-check-input"
+                type="checkbox"
+                name="tags"
+                value="<%= tag._id %>"
+                id="tag-<%= tag._id %>"
+            >
+
+            <label
+                class="form-check-label"
+                for="tag-<%= tag._id %>"
+            >
+                <%= tag.name %>
+            </label>
+        </div>
+
+    <% }) %>
+</div>
+
+        <div class="mb-3">
+            <label for="coverImage" class="form-label" >Cover Image</label>
+            <input type="file" class="form-control" id="coverImage" name="coverImage" aria-describedby="coverImage"/>
+        </div>
+        <div class="mb-3">
+            <label for="title" class="form-label" >Title</label>
+            <input type="text" class="form-control" id="title" name="title" aria-describedby="title"/>
+        </div>
+          <div class="mb-3">
+            <label for="body" class="body" >Body</label>
+            <textarea class="form-control" name="body" id="body"></textarea>
+        </div>
+        <div class="mb-1">
+            <button class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+</div>
+   
+<%- include('./partials/scripts') %>
+</body>
+</html>

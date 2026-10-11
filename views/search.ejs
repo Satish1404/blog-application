@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head') %>
+    <title>searchpage</title>
+</head>
+<body>
+
+<%- include('./partials/nav') %>
+
+    <div class="container mt-4">
+
+        <h3>
+            Search results for:
+            "<%= search %>"
+        </h3>
+
+        <hr>
+
+        <% if (blogs.length === 0) { %>
+
+            <p>No blogs found.</p>
+
+        <% } %>
+
+
+        <div class="row">
+
+            <% blogs.forEach(blog => { %>
+
+                <div class="col-md-4 mb-4">
+
+                    <div class="card">
+
+                        <% if (blog.coverImageURL) { %>
+
+                            <img
+                                src="<%= blog.coverImageURL %>"
+                                class="card-img-top"
+                                style="height: 200px; object-fit: cover;"
+                            >
+
+                        <% } %>
+
+                        <div class="card-body">
+
+                            <h5 class="card-title">
+                                <%= blog.title %>
+                            </h5>
+
+                            <a
+                                href="/blog/<%= blog._id %>"
+                                class="btn btn-primary"
+                            >
+                                Read Blog
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            <% }) %>
+
+        </div>
+
+
+        <div class="pagination">
+
+            <% if (currentPage > 1) { %>
+
+                <a href="/search?q=<%= search %>&page=<%= currentPage - 1 %>">
+                    Previous
+                </a>
+
+            <% } %>
+
+
+            <% for (let i = 1; i <= totalPages; i++) { %>
+
+                <a
+                    href="/search?q=<%= search %>&page=<%= i %>"
+                    class="<%= currentPage === i ? 'active' : '' %>"
+                >
+                    <%= i %>
+                </a>
+
+            <% } %>
+
+
+            <% if (currentPage < totalPages) { %>
+
+                <a href="/search?q=<%= search %>&page=<%= currentPage + 1 %>">
+                    Next
+                </a>
+
+            <% } %>
+
+        </div>
+
+    </div>
+   
+<%- include('./partials/scripts') %>
+</body>
+</html>
